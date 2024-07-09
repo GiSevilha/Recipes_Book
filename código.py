@@ -90,16 +90,36 @@ def creat_recipe():
         print("\nArchivo creado con éxito")
 
 
-def creat_category(category_name):
-    my_path = Path(get_recipes_path() / category_name)
+def creat_category(category):
+    my_path = Path(get_recipes_path() / category)
     my_path.mkdir()
     print("Categoty created successfully")
 
 
-def delete_recipe(category, path):
+def delete_recipe():
+    category_name_delete = input("Write the name of the category you want to delete: ").lower()
+    path_category = Path(get_recipes_path(), category_name_delete)
+    if path_category.exists():
+        recipes = list(path_category.glob("*.txt"))
+        for i, r in enumerate(recipes, 1):
+            print(f"{i} {r.stem}")
+        choice = int(input("Which option? (write the number) "))
+        file_delete = recipes[choice]
+        file_delete.unlink()
+        print("Recipe deleted successfully!")
+    else:
+        print("This category does not exists")
 
 
+def delete_category():
+    category_name_delete = input("Write the name of the category you want to delete: ").lower()
+    category_path_delete = Path(get_recipes_path(), category_name_delete)
+    if category_path_delete.exists() and category_path_delete.is_dir():
+        for file in category_path_delete.glob("*.txt"):
+            file.unlink()
+        category_path_delete.rmdir()
+        print("Category deleted successfully!")
+    else:
+        print("Category not valid.")
 
 
-category_name = input("Please, write the name of the new category: ")
-creat_category(category_name)
