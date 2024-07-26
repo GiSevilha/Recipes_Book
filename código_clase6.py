@@ -141,8 +141,11 @@ while not end_program:
         categories = show_categories(my_path)
         my_category = choose_category(categories)
         my_recipes = show_recipes(my_category)
-        my_recipe = choose_recipes(my_recipes)
-        read_recipe(my_recipe)
+        if len(my_recipes) < 1:
+            print("There's no recipes in this category")
+        else:
+            my_recipe = choose_recipes(my_recipes)
+            read_recipe(my_recipe)
         start_again()
     elif menu == 2:
         categories = show_categories(my_path)
@@ -156,8 +159,11 @@ while not end_program:
         categories = show_categories(my_path)
         my_category = choose_category(categories)
         my_recipes = show_recipes(my_category)
-        my_recipe = choose_recipes(my_recipes)
-        eliminate_recipe(my_recipe)
+        if len(my_recipes) < 1:
+            print("There's no recipes to delete")
+        else:
+            my_recipe = choose_recipes(my_recipes)
+            eliminate_recipe(my_recipe)
         start_again()
     elif menu == 5:
         categories = show_categories(my_path)
